@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-sqlvtwo-dev-91f51-authRole",
+      "UnauthRoleArn": "arn:aws:iam::590184131451:role/amplify-sqlvtwo-dev-91f51-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::590184131451:role/amplify-sqlvtwo-dev-91f51-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-sqlvtwo-dev-91f51-deployment",
+      "UnauthRoleName": "amplify-sqlvtwo-dev-91f51-unauthRole",
+      "StackName": "amplify-sqlvtwo-dev-91f51",
+      "StackId": "arn:aws:cloudformation:us-east-1:590184131451:stack/amplify-sqlvtwo-dev-91f51/ccb0b460-5301-11ef-a46f-12971b089709",
+      "AmplifyAppId": "d30lo7dj5z84bu"
+    }
+  }
+}
