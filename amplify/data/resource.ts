@@ -10,8 +10,9 @@ const schema = a.schema({
   Todo: a
     .model({
       content: a.string(),
+      iscompleted: a.boolean().default(false),
     })
-    .authorization((allow) => [allow.guest()]),
+    .authorization((allow) => [allow.guest(), allow.publicApiKey()]),
 });
 
 export type Schema = ClientSchema<typeof schema>;
@@ -19,7 +20,8 @@ export type Schema = ClientSchema<typeof schema>;
 export const data = defineData({
   schema,
   authorizationModes: {
-    defaultAuthorizationMode: "iam",
+    defaultAuthorizationMode: "apiKey",
+    apiKeyAuthorizationMode: { expiresInDays: 10 },
   },
 });
 
