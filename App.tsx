@@ -29,7 +29,7 @@ export default function App() {
 
   async function fetchTodos() {
     await db.runAsync(
-      `CREATE TABLE IF NOT EXISTS todos (id TEXT PRIMARY KEY, todo TEXT, iscompleted INTEGER DEFAULT 0)`
+      `CREATE TABLE IF NOT EXISTS todos (id TEXT PRIMARY KEY, todo TEXT, iscompleted BOOLEAN DEFAULT false)`
     );
 
     const result = await db.getAllAsync(`SELECT * FROM todos`, null);
@@ -50,8 +50,6 @@ export default function App() {
       setTodoArray(updatedResult);
       Alert.alert("Todo added");
       setTodo("");
-      const ress = await client.models.Todo.list();
-      console.log(ress);
     }
   };
 
@@ -73,8 +71,6 @@ export default function App() {
   const download = async () => {
     try {
       const localIDS = todoArray.map((todo: any) => ({ id: { ne: todo.id } }));
-      const out = await client.models.Todo.list();
-      console.log("out: ", JSON.stringify(out, null, 2));
       const { data: todoList } = await client.models.Todo.list({
         filter: {
           or: localIDS,
@@ -126,8 +122,6 @@ export default function App() {
       const placeholders = remoteIds.map(() => "?").join(",");
       const query = `SELECT * FROM todos WHERE id NOT IN (${placeholders})`;
       const result = await db.getAllAsync(query, remoteIds);
-      console.log("placeholders: ", placeholders);
-      console.log("result: ", result);
       for (const todo of result) {
         await client.models.Todo.create({
           id: todo.id,
@@ -156,6 +150,7 @@ export default function App() {
         <TouchableOpacity style={styles.customButton} onPress={() => upload()}>
           <Text style={styles.customText}>Upload</Text>
         </TouchableOpacity>
+
         <TouchableOpacity
           style={styles.customButton}
           onPress={() => download()}
