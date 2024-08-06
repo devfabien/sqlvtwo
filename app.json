@@ -18,10 +18,23 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.devfab.sqlvtwo"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "841fa0bf-4813-4fc1-88fd-d24b1b41f43a"
+      }
+    },
+    "owner": "devfab",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/841fa0bf-4813-4fc1-88fd-d24b1b41f43a"
     }
   }
 }
