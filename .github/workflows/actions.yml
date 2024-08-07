@@ -53,7 +53,7 @@ jobs:
         run: npm ci
 
       - name: generate amplify outputs
-        run: npx ampx generate outputs
+        run: npx ampx generate outputs --app-id ${{ secrets.APPID }} --branch main
 
       - name: deploy on amplify
         run: amplify push --yes
