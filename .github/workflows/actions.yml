@@ -50,13 +50,17 @@ jobs:
         run: amplify env checkout dev
 
       - name: configure amplify
-        run: amplify pull --appId "d30lo7dj5z84bu" --envName dev --yes
+        uses: ambientlight/amplify-cli-action@0.3.0
+        with:
+          amplify_command: configure
+          amplify_env: prod
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: us-east-1
 
       - name: install dependencies
         run: npm ci
-
-      - name: fetch the outputs lists
-        run: aws cloudformation describe-stacks --stack-name amplify-sqlvtwo-dev-91f51
 
       - name: generate amplify outputs
         run: npx ampx generate outputs --format json --stack amplify-sqlvtwo-dev-91f51 --debug
