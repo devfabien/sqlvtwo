@@ -47,15 +47,16 @@ jobs:
         run: amplify env checkout dev
 
       - name: configure amplify
-        run: amplify pull --app-id ${{secrets.APPID}} --envName dev --region us-east-1 --yes
+        run: amplify pull --appId d30lo7dj5z84bu --envName dev --yes
 
       - name: install dependencies
         run: npm ci
 
+      - name: install ampx
+        run: npm install -g ampx
+
       - name: generate amplify outputs
-        run: |
-          export AWS_REGION=us-east-1
-          npx ampx generate outputs --stack "amplify-sqlvtwo-dev-91f51" --format json --out-dir .
+        run: ampx generate outputs --stack "amplify-sqlvtwo-dev-91f51" --format json --out-dir .
 
       - name: deploy on amplify
         run: amplify push --yes
