@@ -56,10 +56,10 @@ jobs:
         run: npm ci
 
       - name: fetch the outputs lists
-        run: aws cloudformation describe-stacks --stack-name amplify-sqlvtwo-dev-91f51 --stack-status-filter CREATE_COMPLETE UPDATE_COMPLETE
+        run: aws cloudformation describe-stacks --stack-name amplify-sqlvtwo-dev-91f51
 
       - name: generate amplify outputs
-        run: npx ampx generate outputs --stack amplify-sqlvtwo-dev-91f51 --debug
+        run: npx ampx generate outputs --format json --stack amplify-sqlvtwo-dev-91f51 --debug
 
       - name: deploy on amplify
         run: amplify push --yes
