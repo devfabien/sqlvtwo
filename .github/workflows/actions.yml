@@ -47,13 +47,13 @@ jobs:
         run: amplify env checkout dev
 
       - name: configure amplify
-        run: amplify pull --app-id ${{secrets.APPID}} --region us-east-1 --yes
+        run: amplify pull --app-id ${{secrets.APPID}} --envName dev --region us-east-1 --yes
 
       - name: install dependencies
         run: npm ci
 
       - name: generate amplify outputs
-        run: npx ampx generate outputs --app-id ${{ secrets.APPID }} --branch main
+        run: npx ampx generate outputs --stack ${{secrets.STACK}} --app-id ${{ secrets.APPID }} --branch main --format json --out-dir .
 
       - name: deploy on amplify
         run: amplify push --yes
