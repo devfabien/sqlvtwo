@@ -33,8 +33,11 @@ jobs:
       - name: install amplify
         run: npm install -g @aws-amplify/cli
 
+      - name: setup the environment
+        run: amplify env checkout dev
+
       - name: configure amplify
-        run: amplify pull --appid ${{secrets.APPID}} --region us-east-1
+        run: amplify pull --app-id ${{secrets.APPID}} --region us-east-1
 
       - name: install dependencies
         run: npm ci
