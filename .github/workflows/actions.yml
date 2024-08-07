@@ -30,28 +30,26 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
+      - name: install amplify
+        run: npm install -g @aws-amplify/cli
+
       - name: configure amplify
-        uses: ambientlight/amplify-cli-action@0.3.0
-        with:
-          amplify_command: configure
-          amplify_env: dev
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: us-east-1
+        run: |
+          amplify configure -y <<EOF
+          ${AWS_ACCESS_KEY_ID}
+          ${AWS_SECRET_ACCESS_KEY}
+          ${AWS_REGION}
+          EOF
 
       - name: install dependencies
         run: npm ci
 
       - name: deploy on amplify
-        uses: ambientlight/amplify-cli-action@0.3.0
-        with:
-          amplify_command: publish
-          amplify_env: dev
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: us-east-1
+        run: amplify push
 
       - name: build the application
         run: eas buid --platform android --profile preview --non-interactive
