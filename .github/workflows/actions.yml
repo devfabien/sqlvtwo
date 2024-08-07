@@ -55,7 +55,7 @@ jobs:
       - name: generate amplify outputs
         run: |
           export AWS_REGION=us-east-1
-          npx ampx generate outputs --stack amplify-sqlvtwo-dev-91f51 --format json --out-dir .
+          npx ampx generate outputs --stack "amplify-sqlvtwo-dev-91f51" --format json --out-dir .
 
       - name: deploy on amplify
         run: amplify push --yes
