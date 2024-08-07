@@ -33,11 +33,22 @@ jobs:
       - name: install amplify
         run: npm install -g @aws-amplify/cli
 
-      - name: configure amplify
-        run: amplify pull --app-id ${{secrets.APPID}} --region us-east-1
+      - name: init amplify
+        run: |
+          AMPLIFY='{
+            "projectName": "sqltwo",
+            "envName": "dev",
+            "defaultEditor": "code",
+            "framework": "reactnative",
+            "language": "javascript"
+          }'
+          amplify init --amplify $AMPLIFY
 
       - name: setup the environment
         run: amplify env checkout dev
+
+      - name: configure amplify
+        run: amplify pull --app-id ${{secrets.APPID}} --region us-east-1
 
       - name: install dependencies
         run: npm ci
