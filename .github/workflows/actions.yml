@@ -35,14 +35,13 @@ jobs:
 
       - name: init amplify
         run: |
-          AMPLIFY='{
+          amplify init --amplify '{
             "projectName": "sqltwo",
             "envName": "dev",
             "defaultEditor": "code",
             "framework": "reactnative",
             "language": "javascript"
-          }'
-          amplify init --amplify $AMPLIFY
+          }' --yes --envName dev
 
       - name: setup the environment
         run: amplify env checkout dev
