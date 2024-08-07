@@ -53,7 +53,7 @@ jobs:
         run: npm ci
 
       - name: generate amplify outputs
-        run: npx ampx generate outputs --stack ${{secrets.STACK}} --format json --out-dir .
+        run: npx ampx generate outputs --app-id ${{secrets.APPID}} --format json --out-dir .
 
       - name: deploy on amplify
         run: amplify push --yes
