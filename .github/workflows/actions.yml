@@ -53,7 +53,7 @@ jobs:
         run: npm ci
 
       - name: generate amplify outputs
-        run: npx ampx generate outputs --app-id "d30lo7dj5z84bu" --branch dev --format json --out-dir .
+        run: npx ampx generate outputs --stack "amplify-sqlvtwo-dev-91f51" --format json --out-dir .
 
       - name: deploy on amplify
         run: amplify push --yes
